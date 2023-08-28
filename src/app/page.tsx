@@ -3,7 +3,7 @@
 import Geometry from "@/components/geometry";
 import Controls from "@/components/controls";
 import { useEffect, useState } from "react";
-import { STATES } from "@/state";
+import { STATES, State } from "@/state";
 
 export default function Home() {
   const [index, setIndex] = useState(0);
@@ -11,6 +11,12 @@ export default function Home() {
   const [state, setState] = useState(STATES[0]);
 
   const actions = {
+    setState: (fase: number, subfase: number) => {
+      const indexOfState = STATES.findIndex(
+        (s) => s.f === fase && s.s === subfase
+      );
+      setIndex(indexOfState);
+    },
     next: () => {
       const newIndex = normalizeIndex(index + 1);
       setIndex(newIndex);
